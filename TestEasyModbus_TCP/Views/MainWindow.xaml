@@ -1,0 +1,141 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="TestEasyModbus_TCP.Views.MainWindow"
+        Title="TestEasyModbus_TCP v0.0.1"
+        Height="450"
+        Width="800" Loaded="Window_Loaded">
+    <Grid Background="DimGray" RenderTransformOrigin="0.503,0.508">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="9*"/>
+                    <ColumnDefinition Width="13*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="UMG S11:200"
+                           Grid.Row="0"
+                           FontSize="24"
+                          Background="Gray" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="Black" Grid.ColumnSpan="2"/>
+                <TextBlock Text="{Binding DataReader1}" 
+                           Grid.Row="1"
+                          Background="Blue" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="White" Grid.ColumnSpan="2"/>
+                <TextBlock Text="{Binding DataReader2}" 
+                           Grid.Row="2"
+                          Background="DarkBlue" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="White" Grid.ColumnSpan="2"/>
+                <TextBlock Text="{Binding DataReader3}" 
+                           Grid.Row="3"
+                          Background="DarkCyan" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="White" Grid.ColumnSpan="2"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="UMG 96R:25"
+                           Grid.Row="0"
+                           FontSize="24"
+                          Background="Gray" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="Black"/>
+                <TextBlock Text="{Binding DataReader4}" 
+                           Grid.Row="1"
+                          Background="Blue" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="White"/>
+                <TextBlock Text="{Binding DataReader5}" 
+                           Grid.Row="2"
+                          Background="DarkBlue" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="White"/>
+                <TextBlock Text="{Binding DataReader6}" 
+                           Grid.Row="3"
+                          Background="DarkCyan" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="White"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="UMG 96R:34"
+                           Grid.Row="0"
+                           FontSize="24"
+                          Background="Gray" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="Black"/>
+                <TextBlock Text="{Binding DataReader7}" 
+                           Grid.Row="1"
+                          Background="Blue" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="White"/>
+                <TextBlock Text="{Binding DataReader8}" 
+                           Grid.Row="2"
+                          Background="DarkBlue" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="White"/>
+                <TextBlock Text="{Binding DataReader9}" 
+                           Grid.Row="3"
+                          Background="DarkCyan" 
+                          TextAlignment="Center"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Foreground ="White"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Button Content="Refresh" Height="30" Width="100" Click="Button_Click"/>
+            <TextBlock HorizontalAlignment="Left" Margin="133,10,0,0" TextWrapping ="Wrap" Text="Главное окно" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
+            <Button Content="Таблица мощности" HorizontalAlignment="Left" Margin="33,58,0,0" VerticalAlignment="Top" Width="130" Height="30" Click="Button_Click_1"/>
+        </Grid>
+    </Grid>
+</Window>
