@@ -1,141 +1,1091 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="TestEasyModbus_TCP.Views.MainWindow"
-        Title="TestEasyModbus_TCP v0.0.1"
-        Height="450"
-        Width="800" Loaded="Window_Loaded">
-    <Grid Background="DimGray" RenderTransformOrigin="0.503,0.508">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="TestEasyModbus_TCP.Views.MainWindow"
+        Title="РУ-0,4кВ"
+        Height="950" Width="1200" 
+        Loaded="Window_Loaded" Background="#FF324368">
+
+    <!--#region  Стили-->
+    <Window.Resources>
+        <!--#Region TextBlock-->
+        <Style x:Key="BigLette" TargetType="TextBlock" >
+            <Setter Property="FontSize" Value="25 " />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="SmallLetter" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="SmallLetterBold" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+
+        </Style>
+        <!--#endregion-->
+
+        <!--#region Button -->
+        <Style x:Key="MenuButton" TargetType="Button">
+            <Setter Property="Width" Value="90"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Margin" Value="0, 5"/>
+            <Setter Property="BorderThickness" Value="1, 1, 2, 2" />
+            <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="TextBlock.FontSize" Value="14"/>
+            <Setter Property="TextBlock.Background" Value="Green"/>
+            <Setter Property="TextBlock.Foreground" Value="Azure"/>
+        </Style>
+        <!--#endregion-->
+        
+        <Style x:Key="Row" TargetType="RowDefinition">
+            <Setter Property="MinHeight" Value="22"/>
+            <Setter Property="MaxHeight" Value="40"/>
+            <Setter Property="VirtualizingPanel.Background" Value="BlanchedAlmond"/>
+            <!--<Setter Property="Block.Background" Value="White"/>-->
+        </Style>
+        <Style x:Key="DarkRow" TargetType="RowDefinition">
+            <Setter Property="MinHeight" Value="22"/>
+            <Setter Property="MaxHeight" Value="40"/>
+            <Setter Property="Block.Foreground" Value="Gray"/>
+            <Setter Property="VirtualizingPanel.Background" Value="BlanchedAlmond"/>
+        </Style>
+
+        <Style x:Key="Border" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="1"/>
+            <!--<Setter Property="Block.BorderBrush" Value="Black"/>-->
+        </Style>
+        <Style x:Key="DarkBorder" TargetType="Border">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Margin" Value="1"/>
+            <!--<Setter Property="Block.BorderBrush" Value="Black"/>-->
+        </Style>
+
+    </Window.Resources>
+
+    <!--#endregion-->
+
+    <Grid  RenderTransformOrigin="0.503,0.508">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="150"/>
+
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+
         <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="9*"/>
-                    <ColumnDefinition Width="13*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="UMG S11:200"
-                           Grid.Row="0"
-                           FontSize="24"
-                          Background="Gray" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="Black" Grid.ColumnSpan="2"/>
-                <TextBlock Text="{Binding DataReader1}" 
-                           Grid.Row="1"
-                          Background="Blue" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="White" Grid.ColumnSpan="2"/>
-                <TextBlock Text="{Binding DataReader2}" 
-                           Grid.Row="2"
-                          Background="DarkBlue" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="White" Grid.ColumnSpan="2"/>
-                <TextBlock Text="{Binding DataReader3}" 
-                           Grid.Row="3"
-                          Background="DarkCyan" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="White" Grid.ColumnSpan="2"/>
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="UMG 96R:25"
-                           Grid.Row="0"
-                           FontSize="24"
-                          Background="Gray" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="Black"/>
-                <TextBlock Text="{Binding DataReader4}" 
-                           Grid.Row="1"
-                          Background="Blue" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="White"/>
-                <TextBlock Text="{Binding DataReader5}" 
-                           Grid.Row="2"
-                          Background="DarkBlue" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="White"/>
-                <TextBlock Text="{Binding DataReader6}" 
-                           Grid.Row="3"
-                          Background="DarkCyan" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="White"/>
-            </Grid>
-            <Grid Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="UMG 96R:34"
-                           Grid.Row="0"
-                           FontSize="24"
-                          Background="Gray" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="Black"/>
-                <TextBlock Text="{Binding DataReader7}" 
-                           Grid.Row="1"
-                          Background="Blue" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="White"/>
-                <TextBlock Text="{Binding DataReader8}" 
-                           Grid.Row="2"
-                          Background="DarkBlue" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="White"/>
-                <TextBlock Text="{Binding DataReader9}" 
-                           Grid.Row="3"
-                          Background="DarkCyan" 
-                          TextAlignment="Center"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Foreground ="White"/>
-            </Grid>
+            <StackPanel >
+                <Button Content="Обновить" Height="30" Width="60" Margin="5,10" Click="Button_Click"/>
+            </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
-            <Button Content="Refresh" Height="30" Width="100" Click="Button_Click"/>
-            <TextBlock HorizontalAlignment="Left" Margin="133,10,0,0" TextWrapping ="Wrap" Text="Главное окно" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
-            <Button Content="Таблица мощности" HorizontalAlignment="Left" Margin="33,58,0,0" VerticalAlignment="Top" Width="130" Height="30" Click="Button_Click_1"/>
+            <Grid Grid.Column="1" Margin="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="30">
+
+                    </RowDefinition>
+                    <RowDefinition />
+
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="Aquamarine" Margin="1"/>
+                <TextBlock Text="Таблица мощности - Секция шин 1" Grid.Column="0" Grid.Row="0"  Style="{StaticResource BigLette}" />
+
+                <Grid Grid.Row="1" Margin="0,0,0,0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="48*" MinWidth="20"/>
+                        <ColumnDefinition Width="47*" MinWidth="47"/>
+                        <ColumnDefinition Width="238*" MinWidth="200"/>
+                        <ColumnDefinition Width="96*" MinWidth="70"/>
+                        <ColumnDefinition Width="82*" MinWidth="80"/>
+                        <ColumnDefinition Width="104*" MinWidth="80" />
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35" Style="{StaticResource Row}">
+
+                        </RowDefinition>
+
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+
+                        <RowDefinition Height="1*" Style="{StaticResource Row}" />
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                        <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+
+
+                    </Grid.RowDefinitions>
+
+                    <!--#region Бордер-->
+                    <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="0" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="0" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="1" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="1" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="2" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="2" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="3" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="3" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="3" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="3" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="4" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="4" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="4" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="4" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="4" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="5" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="5" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="5" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="5" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="5" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="5" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="6" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="6" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="6" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="6" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="6" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="6" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="7" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="7" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="7" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="7" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="7" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="7" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="8" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="8" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="8" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="8" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="8" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="8" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="9" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="9" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="9" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="9" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="9" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="9" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="10" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="10" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="10" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="10" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="10" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="10" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="11" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="11" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="11" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="11" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="11" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="11" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="12" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="12" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="12" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="12" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="12" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="12" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+                    
+                    <Border Grid.Row="13" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="13" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="13" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="13" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="13" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="13" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="14" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="14" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="14" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="14" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="14" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="14" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="15" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="15" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="15" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="15" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="15" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="15" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="16" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="16" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="16" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="16" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="16" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="16" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="17" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="17" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="17" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="17" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="17" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="17" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="18" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="18" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="18" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="18" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="18" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="18" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="19" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="19" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="19" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="19" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="19" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="19" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="20" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="20" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="20" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="20" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="20" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="20" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="21" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="21" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="21" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="21" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="21" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="21" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="22" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="22" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="22" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="22" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="22" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="22" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="23" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="23" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="23" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="23" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="23" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="23" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="24" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="24" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="24" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="24" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="24" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="24" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="25" Grid.Column="0" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="25" Grid.Column="1" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="25" Grid.Column="2" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="25" Grid.Column="3" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="25" Grid.Column="4" Style="{StaticResource Border}"/>
+                    <Border Grid.Row="25" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                    <Border Grid.Row="26" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="26" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="26" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="26" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="26" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="26" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+                    
+                    
+
+                    <Border Grid.Row="28" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="28" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="28" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="28" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="28" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="28" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                    <Border Grid.Row="30" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="30" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="30" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="30" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="30" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                    <Border Grid.Row="30" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+                    <!--#endregion-->
+
+
+                    <!--#region Таблица -->
+                    <!--#region Шапка -->
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="№"  Style="{StaticResource SmallLetterBold}"   />
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="Фидер"  Style="{StaticResource SmallLetterBold}"   />
+                    <TextBlock Grid.Column="2" Grid.Row="0" Text="Назначение линии" Style="{StaticResource SmallLetterBold}"   />
+                    <TextBlock Grid.Column="3" Grid.Row="0" Text="Трансф.Тока" Style="{StaticResource SmallLetterBold}"  />
+                    <TextBlock Grid.Column="4" Grid.Row="0" Text="Мощность,&#10;кВт" Style="{StaticResource SmallLetterBold}"   />
+                    <TextBlock Grid.Column="5" Grid.Row="0" Text="Мощность,&#10;кВт.час"  Style="{StaticResource SmallLetterBold}"  />
+                    <!--#endregion-->
+
+                    <!--Фидер 1 -->
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="1" Style="{StaticResource SmallLetter}"  />
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="=QF1" Style="{StaticResource SmallLetter}"   />
+                    <TextBlock Grid.Column="2" Grid.Row="1" Text="Вод №1 защита от перенапряжения" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"  />
+                    <TextBlock Grid.Column="3" Grid.Row="1" Text="3000/5" Style="{StaticResource SmallLetter}"   />
+                    <TextBlock Grid.Column="4" Grid.Row="1" Text="{Binding DataReadQF1_PSUM3_W}" Style="{StaticResource SmallLetter}" />
+                    <TextBlock Grid.Column="5" Grid.Row="1" Text="{Binding DataReadQF1_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 2 -->
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="2" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="=QS1" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="2" Text="ВРУ-СН Гипсовое отделение, Ввод №1" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5"   />
+                    <TextBlock Grid.Column="3" Grid.Row="2" Text="250/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="2" Text="{Binding DataReadQS1_PSUM3_W}" Style="{StaticResource SmallLetter}"  />
+                    <TextBlock Grid.Column="5" Grid.Row="2" Text="{Binding DataReadQS1_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 3 -->
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="3" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="=QS3" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="3" Text="РЕЗЕРВ" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5" />
+                    <TextBlock Grid.Column="3" Grid.Row="3" Text="150/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="3" Text="{Binding DataReadQS3_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="3" Text="{Binding DataReadQS3_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 4 -->
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="4" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="=QS4" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="4" Text="ВРУ-1, АБК, Ввод №1" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5"   />
+                    <TextBlock Grid.Column="3" Grid.Row="4" Text="250/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="4" Text="{Binding DataReadQS4_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="4" Text="{Binding DataReadQS4_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 5 -->
+                    <TextBlock Grid.Column="0" Grid.Row="5" Text="5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="=QS5" Style="{StaticResource SmallLetter}" />
+                    <TextBlock Grid.Column="2" Grid.Row="5" Text="ВРУ-2, КПП, Ввод №1" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5"  />
+                    <TextBlock Grid.Column="3" Grid.Row="5" Text="100/5"  Style="{StaticResource SmallLetter}" />
+                    <TextBlock Grid.Column="4" Grid.Row="5" Text="{Binding DataReadQS5_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="5" Text="{Binding DataReadQS5_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 6 -->
+                    <TextBlock Grid.Column="0" Grid.Row="6" Text="6" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="6" Text="=QS6" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="6" Text="Натяжение плёнки" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5" />
+                    <TextBlock Grid.Column="3" Grid.Row="6" Text="100/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="6" Text="{Binding DataReadQS6_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="6" Text="{Binding DataReadQS6_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 7 -->
+                    <TextBlock Grid.Column="0" Grid.Row="7" Text="7" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="7" Text="=QS7" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="7" Text="ШР-1, Мойка" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="7" Text="100/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="7" Text="{Binding DataReadQS7_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="7" Text="{Binding DataReadQS7_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 8 -->
+                    <TextBlock Grid.Column="0" Grid.Row="8" Text="8" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="8" Text="=QS8" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="8" Text="Палетайзер" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="8" Text="100/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="8" Text="{Binding DataReadQS8_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="8" Text="{Binding DataReadQS8_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 9 -->
+                    <TextBlock Grid.Column="0" Grid.Row="9" Text="9"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="9" Text="=QS9"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="9" Text="Наружное освещение, Ввод №1"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="9" Text="100/5"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="9" Text="{Binding DataReadQS9_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="9" Text="{Binding DataReadQS9_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 10 -->
+                    <TextBlock Grid.Column="0" Grid.Row="10" Text="10"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="10" Text="=QS10"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="10" Text="АУКРМ-1"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="10" Text="500/5"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="10" Text="{Binding DataReadQS10_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="10" Text="{Binding DataReadQS10_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 11 -->
+                    <TextBlock Grid.Column="0" Grid.Row="11" Text="11"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="11" Text="=QS11"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="11" Text="АУКРМ-2"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="11" Text="500/5"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="11" Text="{Binding DataReadQS11_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="11" Text="{Binding DataReadQS11_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 12 -->
+                    <TextBlock Grid.Column="0" Grid.Row="12" Text="12"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="12" Text="=QF4"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="12" Text="Дробильная установка Н 2.4 +DA01"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="12" Text="1200/5"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="12" Text="{Binding DataReadQF4_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="12" Text="{Binding DataReadQF4_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 13 -->
+                    <TextBlock Grid.Column="0" Grid.Row="13" Text="13"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="13" Text="=QF5"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="13" Text="РЕЗЕРВ" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="13" Text="800/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="13" Text="{Binding DataReadQF5_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="13" Text="{Binding DataReadQF5_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 14 -->
+                    <TextBlock Grid.Column="0" Grid.Row="14" Text="14"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="14" Text="=QF6" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="14" Text="РЕЗЕРВ" VerticalAlignment ="Center" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="14" Text="600/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="14" Text="{Binding DataReadQF6_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="14" Text="{Binding DataReadQF6_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 15 -->
+                    <TextBlock Grid.Column="0" Grid.Row="15" Text="15"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="15" Text="=QF7" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="15" Text="РЕЗЕРВ" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="15" Text="600/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="15" Text="{Binding DataReadQF7_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="15" Text="{Binding DataReadQF7_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 16 -->
+                    <TextBlock Grid.Column="0" Grid.Row="16" Text="16"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="16" Text="=QF8" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="16" Text="Компрессорная ШУ-К" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="16" Text="600/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="16" Text="{Binding DataReadQF8_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="16" Text="{Binding DataReadQF8_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 17 -->
+                    <TextBlock Grid.Column="0" Grid.Row="17" Text="17" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="17" Text="=QS12" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="17" Text="ГРЩ 0,4кВ КНС-1,2 сигнализация Н1.12" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="17" Text="250/5"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="17" Text="{Binding DataReadQS12_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="17" Text="{Binding DataReadQS12_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 18 -->
+                    <TextBlock Grid.Column="0" Grid.Row="18" Text="18" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="18" Text="=QS13" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="18" Text="Склад комплектации" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="18" Text="400/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="18" Text="{Binding DataReadQS13_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="18" Text="{Binding DataReadQS13_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 19 -->
+                    <TextBlock Grid.Column="0" Grid.Row="19" Text="19" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="19" Text="=QS14" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="19" Text="Линия грунтовок" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="19" Text="400/5"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="19" Text="{Binding DataReadQS14_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="19" Text="{Binding DataReadQS14_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 20 -->
+                    <TextBlock Grid.Column="0" Grid.Row="20" Text="20"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="20" Text="=QS15" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="20" Text="РЕЗЕРВ" VerticalAlignment ="Center" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="20" Text="400/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="20" Text="{Binding DataReadQS15_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="20" Text="{Binding DataReadQS15_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 21 -->
+                    <TextBlock Grid.Column="0" Grid.Row="21" Text="21" VerticalAlignment ="Center"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="21" Text="=QS16" VerticalAlignment ="Center"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="21" Text="Стацион.Вакуумная установка"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="21" Text="400/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="21" Text="{Binding DataReadQS16_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="21" Text="{Binding DataReadQS16_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 22 -->
+                    <TextBlock Grid.Column="0" Grid.Row="22" Text="22"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="22" Text="=QS17"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="22" Text="ГРЩ 0,4кВ, ВРУ-3 насосная, Н1.7" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="22" Text="150/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="22" Text="{Binding DataReadQS17_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="22" Text="{Binding DataReadQS17_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 23 -->
+                    <TextBlock Grid.Column="0" Grid.Row="23" Text="23" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="23" Text="=QS18" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="23" Text="Фасовочная машина Н1.9" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="23" Text="250/5" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="23" Text="{Binding DataReadQS18_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="5" Grid.Row="23" Text="{Binding DataReadQS18_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 24 -->
+                    <TextBlock Grid.Column="0" Grid.Row="24" Text="24" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="24" Text="=QS19" Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="24" Text="СПП-250 Перлит ГРЩ 0,4кВ ШУ Н2.11" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="24" Text="150/5"  Style="{StaticResource SmallLetter}"/>
+                    <TextBlock Grid.Column="4" Grid.Row="24" Text="{Binding DataReadQS19_PSUM3_W}" Style="{StaticResource SmallLetter}" />
+                    <TextBlock Grid.Column="5" Grid.Row="24" Text="{Binding DataReadQS19_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                    <!--Фидер 25 -->
+                    <TextBlock Grid.Column="0" Grid.Row="25" Text="&#128526;"  Style="{StaticResource SmallLetter}" />
+                    <TextBlock Grid.Column="1" Grid.Row="25" Text="&#x1f60e;"  Style="{StaticResource SmallLetter}" />
+                    <TextBlock Grid.Column="2" Grid.Row="25" Text="-"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                    <TextBlock Grid.Column="3" Grid.Row="25" Text="-"  Style="{StaticResource SmallLetter}" />
+                    <TextBlock Grid.Column="4" Grid.Row="25" Text="-"  Style="{StaticResource SmallLetter}" />
+                    <TextBlock Grid.Column="5" Grid.Row="25" Text="-"  Style="{StaticResource SmallLetter}" />
+                    <!--#endregion-->
+
+                </Grid>
+
+            </Grid>
+
         </Grid>
+
+
+
+        <Grid Grid.Column="2" Margin="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+
+            <Grid.RowDefinitions >
+                <RowDefinition Height="30">
+
+                </RowDefinition>
+                <RowDefinition />
+
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Background="Aquamarine" Margin="1"/>
+            <TextBlock Text="Таблица мощности - Секция шин 2" Grid.Column="0" Grid.Row="0"  Style="{StaticResource BigLette}" />
+
+            <Grid Grid.Row="1" Margin="0,0,0,0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48*" MinWidth="20"/>
+                    <ColumnDefinition Width="47*" MinWidth="47"/>
+                    <ColumnDefinition Width="238*" MinWidth="200"/>
+                    <ColumnDefinition Width="96*" MinWidth="70"/>
+                    <ColumnDefinition Width="82*" MinWidth="80"/>
+                    <ColumnDefinition Width="104*" MinWidth="80" />
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" Style="{StaticResource Row}">
+
+                    </RowDefinition>
+
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+
+                    <RowDefinition Height="1*" Style="{StaticResource Row}" />
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource Row}"/>
+                    <RowDefinition Height="1*" Style="{StaticResource DarkRow}"/>
+
+
+                </Grid.RowDefinitions>
+
+                <!--#region Бордер-->
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="0" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="0" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="0" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="1" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="1" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="1" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="2" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="2" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="2" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="3" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="3" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="3" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="3" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="3" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="4" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="4" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="4" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="4" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="4" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="4" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="5" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="5" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="5" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="5" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="5" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="5" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="6" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="6" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="6" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="6" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="6" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="6" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="7" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="7" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="7" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="7" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="7" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="7" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="8" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="8" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="8" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="8" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="8" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="8" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="9" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="9" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="9" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="9" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="9" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="9" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="10" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="10" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="10" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="10" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="10" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="10" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="11" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="11" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="11" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="11" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="11" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="11" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="12" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="12" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="12" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="12" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="12" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="12" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="13" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="13" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="13" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="13" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="13" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="13" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="14" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="14" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="14" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="14" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="14" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="14" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="15" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="15" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="15" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="15" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="15" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="15" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="16" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="16" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="16" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="16" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="16" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="16" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="17" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="17" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="17" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="17" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="17" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="17" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="18" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="18" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="18" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="18" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="18" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="18" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="19" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="19" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="19" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="19" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="19" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="19" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="20" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="20" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="20" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="20" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="20" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="20" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+                
+                <Border Grid.Row="21" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="21" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="21" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="21" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="21" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="21" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="22" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="22" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="22" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="22" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="22" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="22" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="23" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="23" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="23" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="23" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="23" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="23" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="24" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="24" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="24" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="24" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="24" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="24" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="25" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="25" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="25" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="25" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="25" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="25" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="26" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="26" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="26" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="26" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="26" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="26" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="27" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="27" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="27" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="27" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="27" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="27" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="28" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="28" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="28" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="28" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="28" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="28" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+
+                <Border Grid.Row="29" Grid.Column="0" Style="{StaticResource Border}"/>
+                <Border Grid.Row="29" Grid.Column="1" Style="{StaticResource Border}"/>
+                <Border Grid.Row="29" Grid.Column="2" Style="{StaticResource Border}"/>
+                <Border Grid.Row="29" Grid.Column="3" Style="{StaticResource Border}"/>
+                <Border Grid.Row="29" Grid.Column="4" Style="{StaticResource Border}"/>
+                <Border Grid.Row="29" Grid.Column="5" Style="{StaticResource Border}"/>
+
+                <Border Grid.Row="30" Grid.Column="0" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="30" Grid.Column="1" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="30" Grid.Column="2" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="30" Grid.Column="3" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="30" Grid.Column="4" Style="{StaticResource DarkBorder}"/>
+                <Border Grid.Row="30" Grid.Column="5" Style="{StaticResource DarkBorder}"/>
+                <!--#endregion-->
+
+
+                <!--#region Таблица -->
+                <!--#region Шапка -->
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="№"  Style="{StaticResource SmallLetterBold}"   />
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Фидер"  Style="{StaticResource SmallLetterBold}"   />
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="Назначение линии" Style="{StaticResource SmallLetterBold}"   />
+                <TextBlock Grid.Column="3" Grid.Row="0" Text="Трансф.Тока" Style="{StaticResource SmallLetterBold}"  />
+                <TextBlock Grid.Column="4" Grid.Row="0" Text="Мощность,&#10;кВт" Style="{StaticResource SmallLetterBold}"   />
+                <TextBlock Grid.Column="5" Grid.Row="0" Text="Мощность,&#10;кВт.час"  Style="{StaticResource SmallLetterBold}"  />
+                <!--#endregion-->
+
+                <!--Фидер 25 -->
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="25" Style="{StaticResource SmallLetter}"  />
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="=QF2" Style="{StaticResource SmallLetter}"   />
+                <TextBlock Grid.Column="2" Grid.Row="1" Text="Вод №2 защита от перенапряжения" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"  />
+                <TextBlock Grid.Column="3" Grid.Row="1" Text="3000/5" Style="{StaticResource SmallLetter}"   />
+                <TextBlock Grid.Column="4" Grid.Row="1" Text="{Binding DataReadQF2_PSUM3_W}" Style="{StaticResource SmallLetter}" />
+                <TextBlock Grid.Column="5" Grid.Row="1" Text="{Binding DataReadQF2_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 26 -->
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="26" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="=QS20" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="2" Text="РЕЗЕРВ" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5"   />
+                <TextBlock Grid.Column="3" Grid.Row="2" Text="150/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="2" Text="{Binding DataReadQS20_PSUM3_W}" Style="{StaticResource SmallLetter}"  />
+                <TextBlock Grid.Column="5" Grid.Row="2" Text="{Binding DataReadQS20_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 27 -->
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="27" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="=QS21" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="3" Text="АУКРМ-3" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5" />
+                <TextBlock Grid.Column="3" Grid.Row="3" Text="500/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="3" Text="{Binding DataReadQS21_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="3" Text="{Binding DataReadQS21_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 28 -->
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="28" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="4" Text="=QS22" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="4" Text="АУКРМ-4" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5"   />
+                <TextBlock Grid.Column="3" Grid.Row="4" Text="500/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="4" Text="{Binding DataReadQS22_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="4" Text="{Binding DataReadQS22_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 29 -->
+                <TextBlock Grid.Column="0" Grid.Row="5" Text="29" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="5" Text="=QS23" Style="{StaticResource SmallLetter}" />
+                <TextBlock Grid.Column="2" Grid.Row="5" Text="РЕЗЕРВ" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5"  />
+                <TextBlock Grid.Column="3" Grid.Row="5" Text="400/5"  Style="{StaticResource SmallLetter}" />
+                <TextBlock Grid.Column="4" Grid.Row="5" Text="{Binding DataReadQS23_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="5" Text="{Binding DataReadQS23_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 30 -->
+                <TextBlock Grid.Column="0" Grid.Row="6" Text="30" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="6" Text="=QS24" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="6" Text="РЕЗЕРВ" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5" />
+                <TextBlock Grid.Column="3" Grid.Row="6" Text="200/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="6" Text="{Binding DataReadQS24_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="6" Text="{Binding DataReadQS24_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 31 -->
+                <TextBlock Grid.Column="0" Grid.Row="7" Text="31" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="7" Text="=QS25" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="7" Text="ВРУ СН Гипсовое отделение Ввод №2" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="7" Text="250/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="7" Text="{Binding DataReadQS25_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="7" Text="{Binding DataReadQS25_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 32 -->
+                <TextBlock Grid.Column="0" Grid.Row="8" Text="32" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="8" Text="=QS26" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="8" Text="ВРУ-1 АБК Ввод №2" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="8" Text="400/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="8" Text="{Binding DataReadQS26_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="8" Text="{Binding DataReadQS26_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 33 -->
+                <TextBlock Grid.Column="0" Grid.Row="9" Text="33"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="9" Text="=QS27"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="9" Text="ГРЩ 0,4кВ ВРУ - Дробилка"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="9" Text="250/5"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="9" Text="{Binding DataReadQS27_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="9" Text="{Binding DataReadQS27_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 34 -->
+                <TextBlock Grid.Column="0" Grid.Row="10" Text="34"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="10" Text="=QF9"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="10" Text="Гипсовый завод Н2.3 +DB01"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="10" Text="1200/5"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="10" Text="{Binding DataReadQF9_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="10" Text="{Binding DataReadQF9_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 35 -->
+                <TextBlock Grid.Column="0" Grid.Row="11" Text="35"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="11" Text="=QF10"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="11" Text="Завод смесей H1.3 +DG01"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="11" Text="1200/5"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="11" Text="{Binding DataReadQF10_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="11" Text="{Binding DataReadQF10_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 36 -->
+                <TextBlock Grid.Column="0" Grid.Row="12" Text="36"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="12" Text="=QF11"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="12" Text="РЕЗЕРВ"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="12" Text="1200/5"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="12" Text="{Binding DataReadQF11_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="12" Text="{Binding DataReadQF11_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 37 -->
+                <TextBlock Grid.Column="0" Grid.Row="13" Text="37"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="13" Text="=QF12"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="13" Text="РЕЗЕРВ" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left"  Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="13" Text="600/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="13" Text="{Binding DataReadQF12_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="13" Text="{Binding DataReadQF12_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 38 -->
+                <TextBlock Grid.Column="0" Grid.Row="14" Text="38"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="14" Text="=QF13" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="14" Text="РЕЗЕРВ" VerticalAlignment ="Center" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="14" Text="600/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="14" Text="{Binding DataReadQF13_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="14" Text="{Binding DataReadQF13_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 39 -->
+                <TextBlock Grid.Column="0" Grid.Row="15" Text="39"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="15" Text="=QS28" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="15" Text="РЕЗЕРВ" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="15" Text="400/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="15" Text="{Binding DataReadQS28_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="15" Text="{Binding DataReadQS28_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 40 -->
+                <TextBlock Grid.Column="0" Grid.Row="16" Text="40"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="16" Text="=QS29" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="16" Text="РЕЗЕРВ" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="16" Text="250/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="16" Text="{Binding DataReadQS29_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="16" Text="{Binding DataReadQS29_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 41 -->
+                <TextBlock Grid.Column="0" Grid.Row="17" Text="41" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="17" Text="=QS31" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="17" Text="Теплый склад, ВРУ СН" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="17" Text="150/5"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="17" Text="{Binding DataReadQS31_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="17" Text="{Binding DataReadQS31_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 42 -->
+                <TextBlock Grid.Column="0" Grid.Row="18" Text="42" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="18" Text="=QS32" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="18" Text="РЕЗЕРВ" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="18" Text="150/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="18" Text="{Binding DataReadQS32_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="18" Text="{Binding DataReadQS32_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 43 -->
+                <TextBlock Grid.Column="0" Grid.Row="19" Text="43" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="19" Text="=QS33" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="19" Text="Наружное освещение, Ввод №1" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="19" Text="100/5"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="19" Text="{Binding DataReadQS33_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="19" Text="{Binding DataReadQS33_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 44 -->
+                <TextBlock Grid.Column="0" Grid.Row="20" Text="44"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="20" Text="=QS34" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="20" Text="ВРУ-2, КПП, Ввод №2, Н2.8" VerticalAlignment ="Center" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="20" Text="100/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="20" Text="{Binding DataReadQS34_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="20" Text="{Binding DataReadQS34_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 45 -->
+                <TextBlock Grid.Column="0" Grid.Row="21" Text="45" VerticalAlignment ="Center"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="21" Text="=QS35" VerticalAlignment ="Center"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="21" Text="ШВР-2, Холодный склад, Н2.9"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="21" Text="100/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="21" Text="{Binding DataReadQS35_PSUM3_W}"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="21" Text="{Binding DataReadQS35_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 46 -->
+                <TextBlock Grid.Column="0" Grid.Row="22" Text="46"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="22" Text="=QS36"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="22" Text="ГРЩ 0,4кВ ШУ ТЗП, Н2.10" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="22" Text="100/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="22" Text="{Binding DataReadQS36_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="22" Text="{Binding DataReadQS36_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 47 -->
+                <TextBlock Grid.Column="0" Grid.Row="23" Text="47" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="23" Text="=QS37" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="23" Text="РЕЗЕРВ" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="23" Text="150/5" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="23" Text="{Binding DataReadQS37_PSUM3_W}" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="5" Grid.Row="23" Text="{Binding DataReadQS37_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 48 -->
+                <TextBlock Grid.Column="0" Grid.Row="24" Text="48" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="1" Grid.Row="24" Text="=QS38" Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="2" Grid.Row="24" Text="ГРЩ 0,4кВ,ВРУ-3 насосная, Н2.7" Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="24" Text="150/5"  Style="{StaticResource SmallLetter}"/>
+                <TextBlock Grid.Column="4" Grid.Row="24" Text="{Binding DataReadQS38_PSUM3_W}" Style="{StaticResource SmallLetter}" />
+                <TextBlock Grid.Column="5" Grid.Row="24" Text="{Binding DataReadQS38_WHSUM3_Wh}" Style="{StaticResource SmallLetter}"/>
+
+                <!--Фидер 49 -->
+                <TextBlock Grid.Column="0" Grid.Row="25" Text="49"  Style="{StaticResource SmallLetter}" />
+                <TextBlock Grid.Column="1" Grid.Row="25" Text="=QF3"  Style="{StaticResource SmallLetter}" />
+                <TextBlock Grid.Column="2" Grid.Row="25" Text="Секцищнный выключатель"  Style="{StaticResource SmallLetter}" HorizontalAlignment="Left" Margin="5"/>
+                <TextBlock Grid.Column="3" Grid.Row="25" Text="3000/5"  Style="{StaticResource SmallLetter}" />
+                <TextBlock Grid.Column="4" Grid.Row="25" Text="{Binding DataReadQF3_PSUM3_W}"  Style="{StaticResource SmallLetter}" />
+                <TextBlock Grid.Column="5" Grid.Row="25" Text="{Binding DataReadQF3_WHSUM3_Wh}"  Style="{StaticResource SmallLetter}" />
+                <!--#endregion-->
+
+
+
+            </Grid>
+
+
+
+
+        </Grid>
+
     </Grid>
+
 </Window>
