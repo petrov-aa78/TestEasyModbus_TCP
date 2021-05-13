@@ -8,12 +8,14 @@ using TestEasyModbus_TCP.Models;
 
 namespace TestEasyModbus_TCP.ViewModels
 {
-   
+
 
 
     public class BaseViewModel
     {
-        public string ErrorRead { set;  get; }
+        public string ErrorRead { set; get; }
+
+
 
         public string DataReadQF1_PSUM3_W { get; }
         public string DataReadQS1_PSUM3_W { get; }
@@ -157,7 +159,7 @@ namespace TestEasyModbus_TCP.ViewModels
         static string IP_2 = "192.168.20.181";
         static int Port_2 = 502;
 
-       public UMG_96RM QF2 = new UMG_96RM(IP_2, Port_2, 200);
+        static UMG_96RM QF2 = new UMG_96RM(IP_2, Port_2, 200);
         static UMG_96RM QS20 = new UMG_96RM(IP_2, Port_2, 20);
         static UMG_96RM QS21 = new UMG_96RM(IP_2, Port_2, 21);
         static UMG_96RM QS22 = new UMG_96RM(IP_2, Port_2, 22);
@@ -210,7 +212,7 @@ namespace TestEasyModbus_TCP.ViewModels
         static RegMesUMG QF5Data = new RegMesUMG { };
         static RegMesUMG QF6Data = new RegMesUMG { };
         static RegMesUMG QF7Data = new RegMesUMG { };
-        static RegMesUMG QF8Data = new RegMesUMG { }; 
+        static RegMesUMG QF8Data = new RegMesUMG { };
 
 
         static RegMesUMG QF2Data = new RegMesUMG { };
@@ -238,9 +240,9 @@ namespace TestEasyModbus_TCP.ViewModels
         static RegMesUMG QF12Data = new RegMesUMG { };
         static RegMesUMG QF13Data = new RegMesUMG { };
 
-       
+        static ExcelReport PowerReport = new ExcelReport();
 
-        public BaseViewModel()
+    public BaseViewModel()
         {
             #region   Сукция 1  - Чтение данных
 
@@ -415,7 +417,7 @@ namespace TestEasyModbus_TCP.ViewModels
                 DataReadQF12_WHSUM3_Wh = $"{(QF12Data.WHSUM3_Wh / 1000).ToString("f0")}";
                 DataReadQF13_WHSUM3_Wh = $"{(QF13Data.WHSUM3_Wh / 1000).ToString("f0")}";
 
-
+                PowerReport.Report();
                 #endregion
 
             }

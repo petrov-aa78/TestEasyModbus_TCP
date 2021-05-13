@@ -74,5 +74,11 @@ namespace TestEasyModbus_TCP.Views
             WindowTable1 WindowTable1 = new WindowTable1();
             WindowTable1.Show();
         }
+
+        private void bReport_Click(object sender, RoutedEventArgs e)
+        {
+            //сгенирировать отчёт в excel
+           
+        }
     }
 }

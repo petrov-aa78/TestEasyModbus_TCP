@@ -87,7 +87,8 @@
 
         <Grid Grid.Column="0">
             <StackPanel >
-                <Button Content="Обновить" Height="30" Width="60" Margin="5,10" Click="Button_Click"/>
+                <Button Content="Обновить" Height="30" Width="60" Margin="5,4" Click="Button_Click"/>
+                <Button Content="Отчёт" Height="30" Width="60" Margin="5,4" Click="bReport_Click"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
