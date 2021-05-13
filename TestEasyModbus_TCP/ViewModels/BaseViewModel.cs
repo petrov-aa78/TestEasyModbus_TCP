@@ -474,7 +474,7 @@ namespace TestEasyModbus_TCP.ViewModels
                 ArrayPower[48] = DataReadQS38_PSUM3_W;
                 ArrayPower[49] = DataReadQF3_PSUM3_W;
 
-                PowerReport.Report();
+                PowerReport.Report(ArrayPower);
                 #endregion
 
 
