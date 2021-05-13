@@ -84,8 +84,8 @@ namespace TestEasyModbus_TCP.Models
         RegMesUMG Data = new RegMesUMG { };
 
         //Настройки подключения - Связь
-        public string IP { get; set; }
-        public int Port { get; set; }
+        public string ip { get; set; }
+        public int port { get; set; }
         public byte id { get; set; }
 
        
@@ -93,8 +93,8 @@ namespace TestEasyModbus_TCP.Models
         //конструктор
         public  UMG_96RM(string inputIP, int inputPort, byte inputID)
         {
-            this.IP = inputIP;
-            this.Port = inputPort;
+            this.ip = inputIP;
+            this.port = inputPort;
             this.id = inputID;
             this.ErrorConect = "";
             this.connectOK = false;
@@ -103,7 +103,7 @@ namespace TestEasyModbus_TCP.Models
         //Метод считывания постоянных данных 
         public void  GetSmallData(ref RegMesUMG Data)
         {
-            Connect(IP, Port);
+            Connect(ip, port);
             UnitIdentifier = id;
 
             try
@@ -143,7 +143,7 @@ namespace TestEasyModbus_TCP.Models
         {
             try
             {
-                Connect(IP, Port);
+                Connect(ip, port);
                 UnitIdentifier = id;
                             
                 Data.WHSUM3_Wh = ConvertRegistersToFloat(ReadHoldingRegisters(19060, 2), RegisterOrder.HighLow);
@@ -162,7 +162,7 @@ namespace TestEasyModbus_TCP.Models
 
             try
             {
-                Connect(IP, Port);
+                Connect(ip, port);
                 UnitIdentifier = id;
             
                 
