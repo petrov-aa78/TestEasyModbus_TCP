@@ -241,7 +241,7 @@ namespace TestEasyModbus_TCP.ViewModels
         static RegMesUMG QF13Data = new RegMesUMG { };
 
         static ExcelReport PowerReport = new ExcelReport();
-        static string[] ArrayPower = new string[25];
+        static string[] ArrayPower = new string[50];
 
     public BaseViewModel()
         {
@@ -422,57 +422,57 @@ namespace TestEasyModbus_TCP.ViewModels
                 // -------                Создаём массив данных для отчёта
                 // секция 1
                 ArrayPower[0] = "";
-                ArrayPower[1] = DataReadQF1_PSUM3_W;
-                ArrayPower[2] = DataReadQS1_PSUM3_W;
-                ArrayPower[3] = DataReadQS3_PSUM3_W;
-                ArrayPower[4] = DataReadQS4_PSUM3_W;
-                ArrayPower[5] = DataReadQS5_PSUM3_W;
-                ArrayPower[6] = DataReadQS6_PSUM3_W;
-                ArrayPower[7] = DataReadQS7_PSUM3_W;
-                ArrayPower[8] = DataReadQS8_PSUM3_W;
-                ArrayPower[9] = DataReadQS9_PSUM3_W;
-                ArrayPower[10] = DataReadQS10_PSUM3_W;
-                ArrayPower[11] = DataReadQS11_PSUM3_W;
-                ArrayPower[12] = DataReadQF4_PSUM3_W;
-                ArrayPower[13] = DataReadQF5_PSUM3_W;
-                ArrayPower[14] = DataReadQF6_PSUM3_W;
-                ArrayPower[15] = DataReadQF7_PSUM3_W;
-                ArrayPower[16] = DataReadQF8_PSUM3_W;
-                ArrayPower[17] = DataReadQS12_PSUM3_W;
-                ArrayPower[18] = DataReadQS13_PSUM3_W;
-                ArrayPower[19] = DataReadQS14_PSUM3_W;
-                ArrayPower[20] = DataReadQS15_PSUM3_W;
-                ArrayPower[21] = DataReadQS16_PSUM3_W;
-                ArrayPower[22] = DataReadQS17_PSUM3_W;
-                ArrayPower[23] = DataReadQS18_PSUM3_W;
-                ArrayPower[24] = DataReadQS19_PSUM3_W;
+                ArrayPower[1] = DataReadQF1_WHSUM3_Wh;
+                ArrayPower[2] = DataReadQS1_WHSUM3_Wh;
+                ArrayPower[3] = DataReadQS3_WHSUM3_Wh;
+                ArrayPower[4] = DataReadQS4_WHSUM3_Wh;
+                ArrayPower[5] = DataReadQS5_WHSUM3_Wh;
+                ArrayPower[6] = DataReadQS6_WHSUM3_Wh;
+                ArrayPower[7] = DataReadQS7_WHSUM3_Wh;
+                ArrayPower[8] = DataReadQS8_WHSUM3_Wh;
+                ArrayPower[9] = DataReadQS9_WHSUM3_Wh;
+                ArrayPower[10] = DataReadQS10_WHSUM3_Wh;
+                ArrayPower[11] = DataReadQS11_WHSUM3_Wh;
+                ArrayPower[12] = DataReadQF4_WHSUM3_Wh;
+                ArrayPower[13] = DataReadQF5_WHSUM3_Wh;
+                ArrayPower[14] = DataReadQF6_WHSUM3_Wh;
+                ArrayPower[15] = DataReadQF7_WHSUM3_Wh;
+                ArrayPower[16] = DataReadQF8_WHSUM3_Wh;
+                ArrayPower[17] = DataReadQS12_WHSUM3_Wh;
+                ArrayPower[18] = DataReadQS13_WHSUM3_Wh;
+                ArrayPower[19] = DataReadQS14_WHSUM3_Wh;
+                ArrayPower[20] = DataReadQS15_WHSUM3_Wh;
+                ArrayPower[21] = DataReadQS16_WHSUM3_Wh;
+                ArrayPower[22] = DataReadQS17_WHSUM3_Wh;
+                ArrayPower[23] = DataReadQS18_WHSUM3_Wh;
+                ArrayPower[24] = DataReadQS19_WHSUM3_Wh;
 
                 // секция 2
-                ArrayPower[25] = DataReadQF2_PSUM3_W;
-                ArrayPower[26] = DataReadQS20_PSUM3_W;
-                ArrayPower[27] = DataReadQS21_PSUM3_W;
-                ArrayPower[28] = DataReadQS22_PSUM3_W;
-                ArrayPower[29] = DataReadQS23_PSUM3_W;
-                ArrayPower[30] = DataReadQS24_PSUM3_W;
-                ArrayPower[31] = DataReadQS25_PSUM3_W;
-                ArrayPower[32] = DataReadQS26_PSUM3_W;
-                ArrayPower[33] = DataReadQS27_PSUM3_W;
-                ArrayPower[34] = DataReadQF9_PSUM3_W;
-                ArrayPower[35] = DataReadQF10_PSUM3_W;
-                ArrayPower[36] = DataReadQF11_PSUM3_W;
-                ArrayPower[37] = DataReadQF12_PSUM3_W;
-                ArrayPower[38] = DataReadQF13_PSUM3_W;
-                ArrayPower[39] = DataReadQS28_PSUM3_W;
-                ArrayPower[40] = DataReadQS29_PSUM3_W;
-                ArrayPower[41] = DataReadQS31_PSUM3_W;
-                ArrayPower[42] = DataReadQS32_PSUM3_W;
-                ArrayPower[43] = DataReadQS33_PSUM3_W;
-                ArrayPower[44] = DataReadQS34_PSUM3_W;
-                ArrayPower[45] = DataReadQS35_PSUM3_W;
-                ArrayPower[46] = DataReadQS36_PSUM3_W;
-                ArrayPower[47] = DataReadQS37_PSUM3_W;
-                ArrayPower[48] = DataReadQS38_PSUM3_W;
-                ArrayPower[49] = DataReadQF3_PSUM3_W;
+                ArrayPower[25] = DataReadQF2_WHSUM3_Wh;
+                ArrayPower[26] = DataReadQS20_WHSUM3_Wh;
+                ArrayPower[27] = DataReadQS21_WHSUM3_Wh;
+                ArrayPower[28] = DataReadQS22_WHSUM3_Wh;
+                ArrayPower[29] = DataReadQS23_WHSUM3_Wh;
+                ArrayPower[30] = DataReadQS24_WHSUM3_Wh;
+                ArrayPower[31] = DataReadQS25_WHSUM3_Wh;
+                ArrayPower[32] = DataReadQS26_WHSUM3_Wh;
+                ArrayPower[33] = DataReadQS27_WHSUM3_Wh;
+                ArrayPower[34] = DataReadQF9_WHSUM3_Wh;
+                ArrayPower[35] = DataReadQF10_WHSUM3_Wh;
+                ArrayPower[36] = DataReadQF11_WHSUM3_Wh;
+                ArrayPower[37] = DataReadQF12_WHSUM3_Wh;
+                ArrayPower[38] = DataReadQF13_WHSUM3_Wh;
+                ArrayPower[39] = DataReadQS28_WHSUM3_Wh;
+                ArrayPower[40] = DataReadQS29_WHSUM3_Wh;
+                ArrayPower[41] = DataReadQS31_WHSUM3_Wh;
+                ArrayPower[42] = DataReadQS32_WHSUM3_Wh;
+                ArrayPower[43] = DataReadQS33_WHSUM3_Wh;
+                ArrayPower[44] = DataReadQS34_WHSUM3_Wh;
+                ArrayPower[45] = DataReadQS35_WHSUM3_Wh;
+                ArrayPower[46] = DataReadQS36_WHSUM3_Wh;
+                ArrayPower[47] = DataReadQS37_WHSUM3_Wh;
+                ArrayPower[48] = DataReadQS38_WHSUM3_Wh;
+                ArrayPower[49] = DataReadQF3_WHSUM3_Wh;
 
                 PowerReport.Report(ArrayPower);
                 #endregion
