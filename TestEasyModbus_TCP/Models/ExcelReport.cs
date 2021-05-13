@@ -13,7 +13,7 @@ namespace TestEasyModbus_TCP.Models
 {
     class ExcelReport
     {
-        public void Select_reader(string comanda)//для тех кто не догадался string comanda отвечает за строку запроса к базе данных у меня все по классам и функциям раскидано так что можно его убрать показал цикл на примере дата грид кстати скоростью высокой не будет отличаться есть варианты и по быстрее но для не больших обьемов скорость приличная...
+        public void Select_reader()//(string comanda)для тех кто не догадался string comanda отвечает за строку запроса к базе данных у меня все по классам и функциям раскидано так что можно его убрать показал цикл на примере дата грид кстати скоростью высокой не будет отличаться есть варианты и по быстрее но для не больших обьемов скорость приличная...
         {
             #region 1 вариант рабочий
             // Книга Excel.
@@ -28,7 +28,7 @@ namespace TestEasyModbus_TCP.Models
             try
             {
                 // Создание приложения Excel.
-                m_app = new Excel.ApplicationClass();
+                m_app = new Excel.Application();     ////ApplicationClass();
                 // Приложение "невидимо".
                 m_app.Visible = false;
                 // Приложение управляется пользователем.
@@ -55,6 +55,7 @@ namespace TestEasyModbus_TCP.Models
                 //m_workSheet.Cells[10, 10] = "Test";
                 // Сохранение файла Excel.
                 m_workBook.SaveCopyAs(filename);
+                
             }
             finally
             {
