@@ -45,12 +45,12 @@ namespace TestEasyModbus_TCP.Models
                 m_workSheet.Cells[1, 4] = "Трансформаторы \r\n тока,А";
                 m_workSheet.Cells[1, 5] = $"{DateTime.Now.Day} \r\n {DateTime.Now.Month} \r\n {DateTime.Now.Year}";
 
-                m_workSheet.Cells[27, 1] = m_workSheet.Cells[1, 1];
-                m_workSheet.Cells[27, 2] = m_workSheet.Cells[1, 2];
-                m_workSheet.Cells[27, 3] = m_workSheet.Cells[1, 3];
-                m_workSheet.Cells[27, 4] = m_workSheet.Cells[1, 4];
-                m_workSheet.Cells[27, 5] = m_workSheet.Cells[1, 5];
-                m_workSheet.Cells[27, 6] = m_workSheet.Cells[1, 6];
+                m_workSheet.Cells[28, 1] = m_workSheet.Cells[1, 1];
+                m_workSheet.Cells[28, 2] = m_workSheet.Cells[1, 2];
+                m_workSheet.Cells[28, 3] = m_workSheet.Cells[1, 3];
+                m_workSheet.Cells[28, 4] = m_workSheet.Cells[1, 4];
+                m_workSheet.Cells[28, 5] = m_workSheet.Cells[1, 5];
+                m_workSheet.Cells[28, 6] = m_workSheet.Cells[1, 6];
 
                 m_workSheet.Cells[2, 1] = "1";
                 m_workSheet.Cells[2, 2] = "2";
@@ -59,12 +59,12 @@ namespace TestEasyModbus_TCP.Models
                 m_workSheet.Cells[2, 5] = "5";
                 m_workSheet.Cells[2, 6] = "6";
 
-                m_workSheet.Cells[28, 1] = m_workSheet.Cells[2, 1];
-                m_workSheet.Cells[28, 2] = m_workSheet.Cells[2, 2];
-                m_workSheet.Cells[28, 3] = m_workSheet.Cells[2, 3];
-                m_workSheet.Cells[28, 4] = m_workSheet.Cells[2, 4];
-                m_workSheet.Cells[28, 5] = m_workSheet.Cells[2, 5];
-                m_workSheet.Cells[28, 6] = m_workSheet.Cells[2, 6];
+                m_workSheet.Cells[29, 1] = m_workSheet.Cells[2, 1];
+                m_workSheet.Cells[29, 2] = m_workSheet.Cells[2, 2];
+                m_workSheet.Cells[29, 3] = m_workSheet.Cells[2, 3];
+                m_workSheet.Cells[29, 4] = m_workSheet.Cells[2, 4];
+                m_workSheet.Cells[29, 5] = m_workSheet.Cells[2, 5];
+                m_workSheet.Cells[29, 6] = m_workSheet.Cells[2, 6];
 
                 //Заполняем статичные поля "№ Панели"
                 m_workSheet.Cells[3, 1] = "1";
@@ -86,7 +86,7 @@ namespace TestEasyModbus_TCP.Models
                 m_workSheet.Cells[19, 1] = "17";
                 m_workSheet.Cells[20, 1] = "18";
                 m_workSheet.Cells[21, 1] = "19";
-                m_workSheet.Cells[21, 1] = "19";
+                m_workSheet.Cells[22, 1] = "19";
                 m_workSheet.Cells[23, 1] = "20";
                 m_workSheet.Cells[24, 1] = "21";
                 m_workSheet.Cells[25, 1] = "22";
@@ -139,12 +139,12 @@ namespace TestEasyModbus_TCP.Models
                 m_workSheet.Cells[19, 2] = " =QS12";
                 m_workSheet.Cells[20, 2] = " =QS13";
                 m_workSheet.Cells[21, 2] = " ";
-                m_workSheet.Cells[21, 2] = " =QS14";
-                m_workSheet.Cells[22, 2] = " =QS15";
-                m_workSheet.Cells[23, 2] = " =QS16";
-                m_workSheet.Cells[24, 2] = " =QS17";
-                m_workSheet.Cells[25, 2] = " =QS18";
-                m_workSheet.Cells[26, 2] = " =QS19";
+                m_workSheet.Cells[22, 2] = " =QS14";
+                m_workSheet.Cells[23, 2] = " =QS15";
+                m_workSheet.Cells[24, 2] = " =QS16";
+                m_workSheet.Cells[25, 2] = " =QS17";
+                m_workSheet.Cells[26, 2] = " =QS18";
+                m_workSheet.Cells[27, 2] = " =QS19";
 
                 m_workSheet.Cells[28, 2] = " =QF2";
                 m_workSheet.Cells[29, 2] = " =QS20";
@@ -192,12 +192,12 @@ namespace TestEasyModbus_TCP.Models
                 m_workSheet.Cells[19, 3] = "ГРЩ 0,4 кВ КНС-1,2 сигнализация Н1.12";
                 m_workSheet.Cells[20, 3] = "Склад комплектации";
                 m_workSheet.Cells[21, 3] = "Cчётчик СЕ102 №007495044001680";
-                m_workSheet.Cells[21, 3] = "Линия ГРУНТОВОК";
-                m_workSheet.Cells[22, 3] = "РЕЗЕРВ";
-                m_workSheet.Cells[23, 3] = "Стацион. Вакуумная установка";
-                m_workSheet.Cells[24, 3] = "ГРЩ 0,4кВ, ВРУ-3 насосная, Н1.7";
-                m_workSheet.Cells[25, 3] = "Фасовочная машина Н1.9";
-                m_workSheet.Cells[26, 3] = "СПП-250 Перлит ГРЩ 0,4кВ ШУ Н2.11";
+                m_workSheet.Cells[22, 3] = "Линия ГРУНТОВОК";
+                m_workSheet.Cells[23, 3] = "РЕЗЕРВ";
+                m_workSheet.Cells[24, 3] = "Стацион. Вакуумная установка";
+                m_workSheet.Cells[25, 3] = "ГРЩ 0,4кВ, ВРУ-3 насосная, Н1.7";
+                m_workSheet.Cells[26, 3] = "Фасовочная машина Н1.9";
+                m_workSheet.Cells[27, 3] = "СПП-250 Перлит ГРЩ 0,4кВ ШУ Н2.11";
 
                 m_workSheet.Cells[28, 3] = "Ввод №2 защита от перенапряжения";
                 m_workSheet.Cells[29, 3] = "РЕЗЕРВ";
@@ -245,12 +245,12 @@ namespace TestEasyModbus_TCP.Models
                 m_workSheet.Cells[19, 4] = "250/5";
                 m_workSheet.Cells[20, 4] = "400/5";
                 m_workSheet.Cells[21, 4] = " - ";
-                m_workSheet.Cells[21, 4] = "400/5";
                 m_workSheet.Cells[22, 4] = "400/5";
                 m_workSheet.Cells[23, 4] = "400/5";
-                m_workSheet.Cells[24, 4] = "150/5";
-                m_workSheet.Cells[25, 4] = "250/5";
-                m_workSheet.Cells[26, 4] = "150/5";
+                m_workSheet.Cells[24, 4] = "400/5";
+                m_workSheet.Cells[25, 4] = "150/5";
+                m_workSheet.Cells[26, 4] = "250/5";
+                m_workSheet.Cells[27, 4] = "150/5";
 
                 m_workSheet.Cells[28, 4] = "3000/5";
                 m_workSheet.Cells[29, 4] = "150/5";
