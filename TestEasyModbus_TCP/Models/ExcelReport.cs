@@ -75,7 +75,7 @@ namespace TestEasyModbus_TCP.Models
             {
                 second = DateTime.Now.Second.ToString();
             }
-
+             
             string filename = "D:\\РУ - 0,4кВ\\Отчет\\Отчет РУ-0.4кВ " +
                DateTime.Now.Year + "." +
                month + "." +
@@ -98,7 +98,7 @@ namespace TestEasyModbus_TCP.Models
                 // Создание приложения Excel.
                 m_app = new Excel.Application();     ////ApplicationClass();
                 // Приложение "невидимо".
-                m_app.Visible = true;//false;
+                m_app.Visible = false;
                 // Приложение управляется пользователем.
                 m_app.UserControl = true;
                 // Добавление книги Excel.
