@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using TestEasyModbus_TCP.ViewModels;
+using TestEasyModbus_TCP.Views;
 
 using System.Configuration; //дла базы данных
 using System.Data;
@@ -78,7 +79,9 @@ namespace TestEasyModbus_TCP.Views
         private void bReport_Click(object sender, RoutedEventArgs e)
         {
             //сгенирировать отчёт в excel
-           
+
+            BaseViewModel Report = new BaseViewModel();
+            Report.Report();
         }
     }
 }
