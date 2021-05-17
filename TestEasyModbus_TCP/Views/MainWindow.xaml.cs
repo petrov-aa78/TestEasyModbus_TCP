@@ -82,6 +82,7 @@ namespace TestEasyModbus_TCP.Views
 
             BaseViewModel Report = new BaseViewModel();
             Report.Report();
+
         }
     }
 }
